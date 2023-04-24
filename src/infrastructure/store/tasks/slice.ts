@@ -39,5 +39,5 @@ const taskSlice = createSlice({
   },
 });
 
-export const { addTask, removeTask } = taskSlice.actions;
+export const { addTask, removeTask, updateTask } = taskSlice.actions;
 export default taskSlice.reducer;

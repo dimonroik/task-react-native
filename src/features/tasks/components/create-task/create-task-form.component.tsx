@@ -92,7 +92,7 @@ export const CreateTaskForm = ({ initialTask, onSubmit }: TaskListItemProps) => 
       </InputGroupsWrapper>
 
       <FormActionsWrapper>
-        <Button mode="contained" onPress={handleSubmit(onSubmit)}>Create</Button>
+        <Button mode="contained" onPress={handleSubmit(onSubmit)}>Save</Button>
       </FormActionsWrapper>
     </FormWrapper>
   );

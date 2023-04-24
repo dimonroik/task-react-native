@@ -4,6 +4,7 @@ export const ScreenName = {
   DELETED_TASKS: 'Deleted tasks',
   ACTIVE_TASKS: 'Tasks',
   NEW_TASK: 'New task',
+  EDIT_TASK: 'Edit task',
   TASK_DETAIL: 'Task Detail',
   ABOUT_US_MAIN: 'about-us',
   ABOUT_US: 'About us',

@@ -22,6 +22,9 @@ export const TasksScreen = ({ navigation }: any) => {
             onClick={() =>
               navigation.navigate(ScreenName.TASK_DETAIL, { task: item })
             }
+            onEdit={() => {
+              navigation.navigate(ScreenName.EDIT_TASK, { task: item })
+            }}
           />
         )}
       />
