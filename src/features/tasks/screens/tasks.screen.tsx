@@ -1,20 +1,16 @@
 import React from 'react';
 import { FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 import { SafeArea } from 'components/utility/safe-area.component';
 import { TaskListItem } from '../components/task-list-item.component';
 import { ScreenName } from 'constant/screens';
+import { RoundedButton } from 'components/rounded-button/rounded-button.component';
+import { AddNewTaskSection } from '../components/tasks.styles';
+import { RootState } from '../../../infrastructure/store/index';
+import { Task } from 'types/task';
 
 export const TasksScreen = ({ navigation }: any) => {
-  const tasks = [
-    {
-      id: 1,
-      name: 'task1',
-      status: 'in progress',
-      dueDate: '25/04/2022',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente facere ut esse porro praesentium explicabo dignissimos exercitationem obcaecati, velit, officiis, beatae veniam fuga! Quos, autem ipsum! Impedit saepe quo aliquid.',
-    },
-  ];
+  const tasks = useSelector<RootState, Task[]>(state => state.tasks.tasks);
 
   return (
     <SafeArea>
@@ -29,6 +25,15 @@ export const TasksScreen = ({ navigation }: any) => {
           />
         )}
       />
+      <AddNewTaskSection>
+        <RoundedButton
+          title="+"
+          size={75}
+          onPress={() => {
+            navigation.navigate(ScreenName.NEW_TASK);
+          }}
+        />
+      </AddNewTaskSection>
     </SafeArea>
   );
 };

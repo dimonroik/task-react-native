@@ -29,15 +29,24 @@ export const AppNavigator = () => (
   <>
     <Tab.Navigator screenOptions={createScreenOptions}>
       <Tab.Screen
+        options={{
+          title: 'Tasks',
+        }}
         name={ScreenName.ACTIVE_TASKS_MAIN}
         component={TasksNavigator}
       />
       <Tab.Screen
         name={ScreenName.DELETED_TASKS_MAIN}
+        options={{
+          title: 'Deleted tasks',
+        }}
         component={DeletedTasksNavigator}
       />
       <Tab.Screen
         name={ScreenName.ABOUT_US_MAIN}
+        options={{
+          title: 'About us',
+        }}
         component={AboutUsNavigator}
       />
     </Tab.Navigator>
