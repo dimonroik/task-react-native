@@ -1,25 +1,14 @@
 import React from 'react';
-
-import {
-  createStackNavigator,
-  TransitionPresets,
-} from '@react-navigation/stack';
-
+import { createStackNavigator } from '@react-navigation/stack';
 import { AboutUsScreen } from '../../features/about-us/screens/about-us.screen';
+import { ScreenName } from 'constant/screens';
 
 const AboutUs = createStackNavigator();
 
 export const AboutUsNavigator = () => {
   return (
-    <AboutUs.Navigator
-      screenOptions={{
-        ...TransitionPresets.ModalPresentationIOS,
-      }}
-    >
-      <AboutUs.Screen
-        name="About Us"
-        component={AboutUsScreen}
-      />
+    <AboutUs.Navigator>
+      <AboutUs.Screen name={ScreenName.ABOUT_US} component={AboutUsScreen} />
     </AboutUs.Navigator>
   );
 };

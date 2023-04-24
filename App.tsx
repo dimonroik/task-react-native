@@ -18,7 +18,6 @@ export default function App() {
     return null;
   }
 
-
   return (
     <>
       <ThemeProvider theme={theme}>

@@ -1,24 +1,16 @@
 import React from 'react';
 
-import {
-  createStackNavigator,
-  TransitionPresets,
-} from '@react-navigation/stack';
-
-import { DeletedTasksScreen } from '../../features/tasks/screens/deleted-tasks.screen';
+import { createStackNavigator } from '@react-navigation/stack';
+import { DeletedTasksScreen } from 'features/tasks/screens/deleted-tasks.screen';
+import { ScreenName } from 'constant/screens';
 
 const DeletedTaskStack = createStackNavigator();
 
 export const DeletedTasksNavigator = () => {
   return (
-    <DeletedTaskStack.Navigator
-
-      screenOptions={{
-        ...TransitionPresets.ModalPresentationIOS,
-      }}
-    >
+    <DeletedTaskStack.Navigator>
       <DeletedTaskStack.Screen
-        name="DeletedTasksList"
+        name={ScreenName.DELETED_TASKS}
         component={DeletedTasksScreen}
       />
     </DeletedTaskStack.Navigator>
