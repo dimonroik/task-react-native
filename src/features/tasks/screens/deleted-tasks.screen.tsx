@@ -15,7 +15,7 @@ export const DeletedTasksScreen = () => {
     <SafeArea>
       <FlatList
         data={oldTasks}
-        renderItem={({ item }) => <TaskListItem task={item} />}
+        renderItem={({ item }) => <TaskListItem task={item} isRemoved />}
       />
     </SafeArea>
   );

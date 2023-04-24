@@ -19,6 +19,7 @@ interface TaskListItemProps {
   onDelete?: () => void;
   onComplete?: () => void;
   onClick?: () => void;
+  isRemoved?: boolean;
 }
 
 export const TaskListItem = ({
@@ -27,6 +28,7 @@ export const TaskListItem = ({
   onDelete = () => {},
   onComplete = () => {},
   onClick = () => {},
+  isRemoved,
 }: TaskListItemProps) => {
   const [isVisibleMenu, setIsVisibleMenu] = useState(false);
   const openMenu = () => setIsVisibleMenu(true);
@@ -39,42 +41,44 @@ export const TaskListItem = ({
     >
       <TaskHeader>
         <TaskName>{task.name}</TaskName>
-        <Menu
-          visible={isVisibleMenu}
-          onDismiss={closeMenu}
-          anchor={
-            <Entypo
-              name="dots-three-vertical"
-              size={24}
-              color="black"
-              onPress={openMenu}
-            />
-          }
-        >
-          <Menu.Item
-            onPress={() => {
-              onEdit();
-              closeMenu();
-            }}
-            title="Edit Task"
-          />
-          <Menu.Item
-            onPress={() => {
-              onDelete();
-              closeMenu();
-            }}
-            title="Delete Task"
-          />
-          {task.status !== TaskStatus.COMPLETED && (
+        {!isRemoved && (
+          <Menu
+            visible={isVisibleMenu}
+            onDismiss={closeMenu}
+            anchor={
+              <Entypo
+                name="dots-three-vertical"
+                size={24}
+                color="black"
+                onPress={openMenu}
+              />
+            }
+          >
             <Menu.Item
               onPress={() => {
-                onComplete();
+                onEdit();
                 closeMenu();
               }}
-              title="Done Task"
+              title="Edit Task"
             />
-          )}
-        </Menu>
+            <Menu.Item
+              onPress={() => {
+                onDelete();
+                closeMenu();
+              }}
+              title="Delete Task"
+            />
+            {task.status !== TaskStatus.COMPLETED && (
+              <Menu.Item
+                onPress={() => {
+                  onComplete();
+                  closeMenu();
+                }}
+                title="Done Task"
+              />
+            )}
+          </Menu>
+        )}
       </TaskHeader>
 
       <TaskStatusWrapper>
