@@ -30,26 +30,23 @@ const TaskSectionLabel = styled.Text`
 `;
 
 export const TaskDetailScreen = ({ route }) => {
-  const task = route.params.task as Task;
+  const task: Task = route.params.task;
 
   return (
     <>
-    <SafeArea>
-      <TaskDetailWrapper>
-        <TaskName>{task.name}</TaskName>
-        <TaskSectionLabel>Status: </TaskSectionLabel>
-        <TaskStatus>{task.status}</TaskStatus>
+      <SafeArea>
+        <TaskDetailWrapper>
+          <TaskName>{task.name}</TaskName>
+          <TaskSectionLabel>Status: </TaskSectionLabel>
+          <TaskStatus>{task.status}</TaskStatus>
 
-        <TaskSectionLabel>DueDate: </TaskSectionLabel>
-        <TaskStatus>{task.dueDate}</TaskStatus>
+          <TaskSectionLabel>DueDate: </TaskSectionLabel>
+          <TaskStatus>{task.dueDate}</TaskStatus>
 
-        <TaskSectionLabel>Description: </TaskSectionLabel>
-        <TaskDescription>
-          {task.description}
-        </TaskDescription>
-      </TaskDetailWrapper>
-    </SafeArea>
+          <TaskSectionLabel>Description: </TaskSectionLabel>
+          <TaskDescription>{task.description}</TaskDescription>
+        </TaskDetailWrapper>
+      </SafeArea>
     </>
-
   );
 };

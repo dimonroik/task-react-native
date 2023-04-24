@@ -3,7 +3,7 @@
     "rules": {
         "quotes": [2, "single", { "avoidEscape": true }],
         "prettier/prettier": [
-          "off",
+          "error",
           {
             "singleQuote": true,
             "parser": "flow"

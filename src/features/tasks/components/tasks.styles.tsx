@@ -5,3 +5,8 @@ export const AddNewTaskSection = styled.View`
   justify-content: flex-end;
   padding: 30px;
 `;
+
+export const NoTaskMessage = styled.Text`
+  text-align: center;
+  padding: ${(props) => props.theme.space[3]};
+`;

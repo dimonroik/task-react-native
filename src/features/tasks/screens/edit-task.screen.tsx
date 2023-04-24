@@ -9,16 +9,19 @@ import { ScreenName } from 'constant/screens';
 export const EditTaskScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
 
-  const task = route.params.task as Task;
+  const task: Task = route.params.task;
 
-  const createTask = useCallback((data: Task) => {
-    dispatch(updateTask(data));
-    navigation.navigate(ScreenName.ACTIVE_TASKS);
-  }, [dispatch, navigation]);
+  const createTask = useCallback(
+    (data: Task) => {
+      dispatch(updateTask(data));
+      navigation.navigate(ScreenName.ACTIVE_TASKS);
+    },
+    [dispatch, navigation]
+  );
 
   return (
     <SafeArea>
-      <CreateTaskForm initialTask={task} onSubmit={createTask}/>
+      <CreateTaskForm initialTask={task} onSubmit={createTask} />
     </SafeArea>
   );
 };

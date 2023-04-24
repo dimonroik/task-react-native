@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Menu } from 'react-native-paper';
 import { Entypo } from '@expo/vector-icons';
 import { Text } from 'react-native';
+import { format } from 'date-fns';
 import {
   TaskWrapper,
   TaskHeader,
@@ -26,7 +27,7 @@ export const TaskListItem = ({
   onComplete = () => {},
   onClick = () => {},
 }: TaskListItemProps) => {
-  const [isVisibleMenu, setIsVisibleMenu] = React.useState(false);
+  const [isVisibleMenu, setIsVisibleMenu] = useState(false);
   const openMenu = () => setIsVisibleMenu(true);
   const closeMenu = () => setIsVisibleMenu(false);
 
@@ -46,15 +47,33 @@ export const TaskListItem = ({
             />
           }
         >
-          <Menu.Item onPress={onEdit} title="Edit Task" />
-          <Menu.Item onPress={onDelete} title="Delete Task" />
-          <Menu.Item onPress={onComplete} title="Done Task" />
+          <Menu.Item
+            onPress={() => {
+              onEdit();
+              closeMenu();
+            }}
+            title="Edit Task"
+          />
+          <Menu.Item
+            onPress={() => {
+              onDelete();
+              closeMenu();
+            }}
+            title="Delete Task"
+          />
+          <Menu.Item
+            onPress={() => {
+              onComplete();
+              closeMenu();
+            }}
+            title="Done Task"
+          />
         </Menu>
       </TaskHeader>
 
       <TaskStatusWrapper>
-        <Text>{task.dueDate}</Text>
-        <Text>{task.status}</Text>
+        <Text>Due date: {format(task.dueDate, 'dd/MM/yyyy')}</Text>
+        <Text>{task.status.toUpperCase()}</Text>
       </TaskStatusWrapper>
       <TaskDescription>{task.description}</TaskDescription>
     </TaskWrapper>

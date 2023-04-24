@@ -7,7 +7,9 @@ import { RootState } from '../../../infrastructure/store';
 import { Task } from 'types/task';
 
 export const DeletedTasksScreen = () => {
-  const oldTasks = useSelector<RootState, Task[]>(state => state.tasks.oldTasks);
+  const oldTasks = useSelector<RootState, Task[]>(
+    (state) => state.tasks.oldTasks
+  );
 
   return (
     <SafeArea>

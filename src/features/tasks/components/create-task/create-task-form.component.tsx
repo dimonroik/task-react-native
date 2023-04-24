@@ -1,19 +1,37 @@
 import React from 'react';
+import { format } from 'date-fns';
 import { Task } from 'types/task';
-import { InputGroupsWrapper, InputGroup, FormActionsWrapper, FieldError, FormWrapper } from './create-task-form.styles';
+import {
+  InputGroupsWrapper,
+  InputGroup,
+  FormActionsWrapper,
+  FieldError,
+  FormWrapper,
+} from './create-task-form.styles';
 import { Button } from 'react-native-paper';
-import { DatePickerModal, en, registerTranslation } from 'react-native-paper-dates';
+import {
+  DatePickerModal,
+  en,
+  registerTranslation,
+} from 'react-native-paper-dates';
 import { Controller, useForm } from 'react-hook-form';
 import { TaskStatus } from 'constant/task-statuses';
 registerTranslation('en', en);
 
 interface TaskListItemProps {
   initialTask?: Task;
-  onSubmit(v: any): void
+  onSubmit(v: any): void;
 }
 
-export const CreateTaskForm = ({ initialTask, onSubmit }: TaskListItemProps) => {
-  const { control, handleSubmit, formState: { errors } } = useForm({
+export const CreateTaskForm = ({
+  initialTask,
+  onSubmit,
+}: TaskListItemProps) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       id: initialTask?.id || Math.floor(Math.random() * 1e6),
       description: initialTask?.description || '',
@@ -31,14 +49,14 @@ export const CreateTaskForm = ({ initialTask, onSubmit }: TaskListItemProps) => 
         <Controller
           control={control}
           rules={{
-          required: true,
+            required: true,
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <InputGroup
               placeholder="Name"
               onBlur={onBlur}
               onChangeText={onChange}
-              value={value as string}
+              value={value}
               error={!!errors.name}
             />
           )}
@@ -53,7 +71,11 @@ export const CreateTaskForm = ({ initialTask, onSubmit }: TaskListItemProps) => 
           }}
           render={({ field: { onChange, value } }) => (
             <>
-              <InputGroup label="Due date" value={value.toString()} onPressIn={() => setOpen(true)} />
+              <InputGroup
+                label="Due date"
+                value={format(value, 'dd/MM/yyyy')}
+                onPressIn={() => setOpen(true)}
+              />
               <DatePickerModal
                 locale="en"
                 mode="single"
@@ -66,7 +88,7 @@ export const CreateTaskForm = ({ initialTask, onSubmit }: TaskListItemProps) => 
                   setOpen(false);
                   onChange(date?.valueOf());
                 }}
-                />
+              />
             </>
           )}
           name="dueDate"
@@ -84,7 +106,7 @@ export const CreateTaskForm = ({ initialTask, onSubmit }: TaskListItemProps) => 
               multiline
               onBlur={onBlur}
               onChangeText={onChange}
-              value={value as string}
+              value={value}
             />
           )}
           name="description"
@@ -92,7 +114,9 @@ export const CreateTaskForm = ({ initialTask, onSubmit }: TaskListItemProps) => 
       </InputGroupsWrapper>
 
       <FormActionsWrapper>
-        <Button mode="contained" onPress={handleSubmit(onSubmit)}>Save</Button>
+        <Button mode="contained" onPress={handleSubmit(onSubmit)}>
+          Save
+        </Button>
       </FormActionsWrapper>
     </FormWrapper>
   );

@@ -9,14 +9,17 @@ import { ScreenName } from 'constant/screens';
 export const CreateTaskScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const createTask = useCallback((data: Task) => {
-    dispatch(addTask(data));
-    navigation.navigate(ScreenName.ACTIVE_TASKS);
-  }, [dispatch, navigation]);
+  const createTask = useCallback(
+    (data: Task) => {
+      dispatch(addTask(data));
+      navigation.navigate(ScreenName.ACTIVE_TASKS);
+    },
+    [dispatch, navigation]
+  );
 
   return (
     <SafeArea>
-      <CreateTaskForm onSubmit={createTask}/>
+      <CreateTaskForm onSubmit={createTask} />
     </SafeArea>
   );
 };
