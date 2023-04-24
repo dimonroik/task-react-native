@@ -1,5 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { TaskStatus } from 'constant/task-statuses';
+import { isBefore } from 'date-fns';
 import { Task } from 'types/task';
+
+const sortTasks = (tasks: Task[]) => {
+  return tasks.sort((a: Task, b: Task) => {
+    if (a.status === TaskStatus.COMPLETED) {
+      return 1;
+    }
+    if (b.status === TaskStatus.COMPLETED) {
+      return -1;
+    }
+    return isBefore(a.dueDate, b.dueDate) ? -1 : 1;
+  });
+};
 
 const taskSlice = createSlice({
   name: 'tasks',
@@ -8,7 +22,7 @@ const taskSlice = createSlice({
       {
         id: 1,
         name: 'task1',
-        status: 'in progress',
+        status: TaskStatus.COMPLETED,
         dueDate: new Date().valueOf(),
         description:
           'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente facere ut esse porro praesentium explicabo dignissimos exercitationem obcaecati, velit, officiis, beatae veniam fuga! Quos, autem ipsum! Impedit saepe quo aliquid.',
@@ -18,7 +32,7 @@ const taskSlice = createSlice({
       {
         id: 5,
         name: 'task1',
-        status: 'in progress',
+        status: TaskStatus.COMPLETED,
         dueDate: 0,
         description:
           'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente facere ut esse porro praesentium explicabo dignissimos exercitationem obcaecati, velit, officiis, beatae veniam fuga! Quos, autem ipsum! Impedit saepe quo aliquid.',
@@ -27,16 +41,18 @@ const taskSlice = createSlice({
   },
   reducers: {
     addTask(state, action: PayloadAction<Task>) {
-      state.tasks = [...state.tasks, action.payload];
+      state.tasks = sortTasks([...state.tasks, action.payload]);
     },
     removeTask(state, action: PayloadAction<Task>) {
       state.tasks = state.tasks.filter((el) => el.id !== action.payload.id);
       state.oldTasks = [...state.oldTasks, action.payload];
     },
     updateTask(state, action: PayloadAction<Task>) {
-      state.tasks = state.tasks.map((el) => {
-        return el.id === action.payload.id ? action.payload : el;
-      });
+      state.tasks = sortTasks(
+        state.tasks.map((el) =>
+          el.id === action.payload.id ? action.payload : el
+        )
+      );
     },
   },
 });

@@ -1,10 +1,14 @@
 import { Card } from 'react-native-paper';
 import styled from 'styled-components/native';
 
-export const TaskWrapper = styled(Card)`
+export const TaskWrapper: any = styled(Card)`
   padding: ${(props) => props.theme.space[3]};
-  margin-top: ${(props) => props.theme.space[3]};
-  margin-bottom: ${(props) => props.theme.space[3]};
+  margin-top: ${(props) => props.theme.space[2]};
+  margin-bottom: ${(props) => props.theme.space[2]};
+  background-color: ${(props: any) =>
+    props.completed
+      ? props.theme.colors.ui.disabled
+      : props.theme.colors.background};
 `;
 
 export const TaskHeader = styled.View`

@@ -11,6 +11,7 @@ import {
   TaskName,
 } from './task-list-item.component.styles';
 import { Task } from 'types/task';
+import { TaskStatus } from 'constant/task-statuses';
 
 interface TaskListItemProps {
   task: Task;
@@ -32,7 +33,10 @@ export const TaskListItem = ({
   const closeMenu = () => setIsVisibleMenu(false);
 
   return (
-    <TaskWrapper onPress={onClick}>
+    <TaskWrapper
+      completed={task.status === TaskStatus.COMPLETED}
+      onPress={onClick}
+    >
       <TaskHeader>
         <TaskName>{task.name}</TaskName>
         <Menu
@@ -40,7 +44,7 @@ export const TaskListItem = ({
           onDismiss={closeMenu}
           anchor={
             <Entypo
-              name="dots-three-horizontal"
+              name="dots-three-vertical"
               size={24}
               color="black"
               onPress={openMenu}
@@ -61,13 +65,15 @@ export const TaskListItem = ({
             }}
             title="Delete Task"
           />
-          <Menu.Item
-            onPress={() => {
-              onComplete();
-              closeMenu();
-            }}
-            title="Done Task"
-          />
+          {task.status !== TaskStatus.COMPLETED && (
+            <Menu.Item
+              onPress={() => {
+                onComplete();
+                closeMenu();
+              }}
+              title="Done Task"
+            />
+          )}
         </Menu>
       </TaskHeader>
 
