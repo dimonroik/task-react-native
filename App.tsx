@@ -6,6 +6,7 @@ import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from '@expo-google-fonts/oswald';
+import { Provider as PaperProvider } from 'react-native-paper';
 import { Navigation } from './src/infrastructure/navigation';
 import { theme } from './src/infrastructure/theme';
 import { store } from './src/infrastructure/store';
@@ -21,11 +22,13 @@ export default function App() {
   }
 
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <Navigation />
-      </ThemeProvider>
-      <StatusBar style="auto" />
-    </Provider>
+    <PaperProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Navigation />
+        </ThemeProvider>
+        <StatusBar style="auto" />
+      </Provider>
+    </PaperProvider>
   );
 }

@@ -8,11 +8,18 @@ const taskSlice = createSlice({
       id: 1,
       name: 'task1',
       status: 'in progress',
-      dueDate: '25/04/2022',
+      dueDate: 0,
       description:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente facere ut esse porro praesentium explicabo dignissimos exercitationem obcaecati, velit, officiis, beatae veniam fuga! Quos, autem ipsum! Impedit saepe quo aliquid.',
     }],
-    oldTasks: [] as Task[],
+    oldTasks: [{
+      id: 5,
+      name: 'task1',
+      status: 'in progress',
+      dueDate: 0,
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente facere ut esse porro praesentium explicabo dignissimos exercitationem obcaecati, velit, officiis, beatae veniam fuga! Quos, autem ipsum! Impedit saepe quo aliquid.',
+    }],
   },
   reducers: {
     addTask(state, action: PayloadAction<Task>) {

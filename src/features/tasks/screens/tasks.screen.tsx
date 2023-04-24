@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 import { SafeArea } from 'components/utility/safe-area.component';
-import { TaskListItem } from '../components/task-list-item.component';
+import { TaskListItem } from '../components/task-list-item/task-list-item.component';
 import { ScreenName } from 'constant/screens';
 import { RoundedButton } from 'components/rounded-button/rounded-button.component';
 import { AddNewTaskSection } from '../components/tasks.styles';
@@ -28,7 +28,7 @@ export const TasksScreen = ({ navigation }: any) => {
       <AddNewTaskSection>
         <RoundedButton
           title="+"
-          size={75}
+          size={55}
           onPress={() => {
             navigation.navigate(ScreenName.NEW_TASK);
           }}

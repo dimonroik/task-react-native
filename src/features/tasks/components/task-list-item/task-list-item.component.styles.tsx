@@ -3,6 +3,8 @@ import styled from 'styled-components/native';
 
 export const TaskWrapper = styled(Card)`
   padding: ${(props) => props.theme.space[3]};
+  margin-top: ${(props) => props.theme.space[3]};
+  margin-bottom: ${(props) => props.theme.space[3]};
 `;
 
 export const TaskHeader = styled.View`
