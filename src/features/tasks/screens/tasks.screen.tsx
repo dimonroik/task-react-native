@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SafeArea } from 'components/utility/safe-area.component';
@@ -13,8 +13,11 @@ import {
   updateTask,
 } from '../../../infrastructure/store/tasks/slice';
 import { TaskStatus } from 'constant/task-statuses';
+import { AppHeader } from 'components/app-header/app-header.component';
+import { TaskFiltersModal } from '../components/task-filters-modal/task-filters-modal.component';
 
 export const TasksScreen = ({ navigation }: any) => {
+  const [filterVisible, setFilterVisible] = useState(false);
   const tasks = useSelector<RootState, Task[]>((state) => state.tasks.tasks);
   const dispatch = useDispatch();
 
@@ -33,6 +36,17 @@ export const TasksScreen = ({ navigation }: any) => {
 
   return (
     <SafeArea>
+      <AppHeader
+        toggleFilters={() => setFilterVisible(!filterVisible)}
+        title={`${tasks.length} tasks`}
+      />
+      <TaskFiltersModal
+        visible={filterVisible}
+        toggleModal={() => setFilterVisible(!filterVisible)}
+        initialFilter={{}}
+        onCancel={() => {}}
+        onApply={() => {}}
+      />
       {tasks.length === 0 && <NoTaskMessage>No created task</NoTaskMessage>}
       <FlatList
         data={tasks}

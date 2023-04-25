@@ -6,7 +6,9 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { Navigation } from './src/infrastructure/navigation';
 import { theme } from './src/infrastructure/theme';
 import { store } from './src/infrastructure/store';
+import { en, registerTranslation } from 'react-native-paper-dates';
 import 'react-native-gesture-handler';
+registerTranslation('en', en);
 
 export default function App() {
   return (

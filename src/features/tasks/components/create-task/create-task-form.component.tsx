@@ -9,14 +9,9 @@ import {
   FormWrapper,
 } from './create-task-form.styles';
 import { Button } from 'react-native-paper';
-import {
-  DatePickerModal,
-  en,
-  registerTranslation,
-} from 'react-native-paper-dates';
+import { DatePickerModal } from 'react-native-paper-dates';
 import { Controller, useForm } from 'react-hook-form';
 import { TaskStatus } from 'constant/task-statuses';
-registerTranslation('en', en);
 
 interface TaskListItemProps {
   initialTask?: Task;
